@@ -310,10 +310,9 @@ void SBusSerialPort::serialPortReceiveThread()
                     // as well as zeros in the four most significant bytes of the flag
                     // byte (byte 23)
 
-                    // if (bytes_buf.front() == kSbusHeaderByte_ &&
-                    //     !(bytes_buf[kSbusFrameLength_ - 2] & 0xF0) &&
-                    //     bytes_buf[kSbusFrameLength_ - 1] == kSbusFooterByte_)
-                    if (bytes_buf.front() == kSbusHeaderByte_)
+                    if (bytes_buf.front() == kSbusHeaderByte_ &&
+                        !(bytes_buf[kSbusFrameLength_ - 2] & 0xF0) &&
+                        bytes_buf[kSbusFrameLength_ - 1] == kSbusFooterByte_)
                     {
                         for (uint8_t i = 0; i < kSbusFrameLength_; i++)
                         {

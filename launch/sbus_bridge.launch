@@ -2,7 +2,8 @@
     <arg name="port_name" default="/dev/ttyUSB0"/>
 
     <node pkg="sbus_bridge" name="sbus_bridge" type="sbus_bridge" output="screen">
-        <param name="port_name" value="$(arg port_name)"/>
+        <param name="port_name" type="string" value="$(arg port_name)"/>
+        <param name="rc_timeout" type="double" value="0.1"/>
     </node>
 
 </launch>

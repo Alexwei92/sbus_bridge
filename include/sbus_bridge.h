@@ -18,6 +18,8 @@ public:
     virtual ~SBusBridge();
 
 private:
+    void watchdogThread();
+
     void handleReceivedSbusMessage(const SBusMsg &received_sbus_msg) override;
 
     bool loadParameters();
@@ -30,8 +32,14 @@ private:
 
     std::atomic_bool destructor_invoked_;
 
+    // Watchdog
+    std::thread watchdog_thread_;
+    std::atomic_bool stop_watchdog_thread_;
+    ros::Time time_last_rc_msg_received_;
+
     // Parameters
     std::string port_name_;
+    double rc_timeout_;
 };
 
 } // namespace sbus_bridge
